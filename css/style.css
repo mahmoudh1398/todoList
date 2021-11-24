@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#saveItem {
+    display: none;
+}
+
+main li {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+}
+
+.todo_heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.check {
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.todo_title {
+    border: none;
+    width: 60%;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.todo_title:focus {
+	outline: none;
+}
+
+.todo_dueDate {
+    border: none;
+    color: gray;
+}
+
+.todo_dueDate:focus {
+    outline: none;
+}
+
+.todo_heading i:nth-child(4) {
+    color: #629cff;
+	cursor: pointer;
+    margin-right: 10px;
+}
+
+.todo_heading i:nth-child(5) {
+    color: #F9314E;
+	cursor: pointer;
+    margin-right: 10px;
+}
+
+.complete {
+	text-decoration: line-through;
+}
+
+#toast{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: white;
+}
+
+#prompt-form{
+    display: inline-block;
+    padding: 5px;
+    width: 400px;
+    border: 1px solid black;
+    vertical-align: middle;
+}
+
+#prompt-form-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display: none;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+#prompt-form-container:before {
+    display: inline-block;
+    height: 100%;
+    content: '';
+    vertical-align: middle;
+}
+
+#cover-div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9000;
+    width: 100%;
+    height: 100%;
+    background-color: gray;
+    opacity: 0.3;
+}
