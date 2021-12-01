@@ -1,4 +1,4 @@
-let form = document.getElementById("form");
+const form = document.getElementById("form");
 const BASE_URL = 'https://60b77f8f17d1dc0017b8a2c4.mockapi.io';
 
 // post todo 
@@ -8,8 +8,12 @@ form.addEventListener("submit", (e) => {
     let todoTitle = document.getElementById('title').value;
     let todoDescription = document.getElementById('description').value;
     let todoDueDate = document.getElementById('dueDate').value;
-    let todoCreatedAt = new Date().toLocaleDateString('en');
-    let todoUpdatedAt = new Date().toLocaleDateString('en');
+    let todoCreatedAt = new Date();
+    todoCreatedAt.toUTCString();
+    todoCreatedAt = Math.floor(todoCreatedAt.getTime()/ 1000);
+    let todoUpdatedAt = new Date();
+    todoUpdatedAt.toUTCString();
+    todoUpdatedAt = Math.floor(todoUpdatedAt.getTime()/ 1000);
     let todoDetails = {
         title: todoTitle,
         description: todoDescription,
@@ -49,35 +53,51 @@ async function getTodos() {
     return data;
 }
 
-// edit todo
-let saveBtn = document.getElementById('saveItem');
-saveBtn.addEventListener('click', editTodo());
-
-async function editTodo() {
-
+document.addEventListener('DOMContentLoaded', async () => {
     let todos = await getTodos();
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const id = urlParams.get('id');
+    let queryString = window.location.search;
+    let urlParams = new URLSearchParams(queryString);
+    let id = +urlParams.get('id');
     let saveTodo;
+    
     todos.forEach(todo => {
         if (todo.id == id) {
             saveTodo = todo;
-            console.log(saveTodo);
         } 
     })
+    
     let todoTitle = document.getElementById('title');
     let todoDescription = document.getElementById('description');
     let todoDueDate = document.getElementById('dueDate');
     todoTitle.value = saveTodo.title;
     todoDescription.value = saveTodo.description;
     todoDueDate.value = saveTodo.dueDate;
+    
     document.getElementById('addItem').style.display = 'none';
     document.getElementById('saveItem').style.display = 'block';
+    
+})
+
+// edit todo
+let saveBtn = document.getElementById('saveItem');
+saveBtn.addEventListener('click', () => {
+
+    let queryString = window.location.search;
+    let urlParams = new URLSearchParams(queryString);
+    let id = +urlParams.get('id');
+    
+    let todoTitle = document.getElementById('title');
+    let todoDescription = document.getElementById('description');
+    let todoDueDate = document.getElementById('dueDate');
+    let todoUpdatedAt = new Date();
+    todoUpdatedAt.toUTCString();
+    todoUpdatedAt = Math.floor(todoUpdatedAt.getTime()/ 1000);
+
     let todoDetails = {
         title: todoTitle.value,
         description: todoDescription.value,
-        dueDate: todoDueDate.value
+        dueDate: todoDueDate.value,
+        updatedAt: todoUpdatedAt
     }
 
     fetch(`${BASE_URL}/todos/${id}`, {
@@ -89,17 +109,20 @@ async function editTodo() {
     })
     .then(response => {
         if (response.ok) {
+            form.reset();
+            window.history.replaceState({}, document.title, "/" + "home.html");
             let toastElList = [].slice.call(document.querySelectorAll('.toast'))
             let toastList = toastElList.map(function (toastEl) {
                 return new bootstrap.Toast(toastEl)
             })
             toastList.forEach(toast => toast.show())
+            document.getElementById('addItem').style.display = 'block';
+            document.getElementById('saveItem').style.display = 'none';
         }
     })
     .catch( (error) => {
         alert('Error: ' + error);
     })
     .finally( () => {
-        form.reset();
     })
-}
+});
