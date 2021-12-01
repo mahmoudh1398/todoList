@@ -32,11 +32,25 @@ form.addEventListener("submit", (e) => {
     })
     .then(response => {
         if (response.ok) {
-            let toastElList = [].slice.call(document.querySelectorAll('.toast'))
-            let toastList = toastElList.map(function (toastEl) {
-                return new bootstrap.Toast(toastEl)
-            })
-            toastList.forEach(toast => toast.show())
+            let x;
+            let toast = document.getElementById("toast");
+            function showToast(){
+                clearTimeout(x);
+                toast.style.transform = "translateX(0)";
+                x = setTimeout(()=>{
+                    toast.style.transform = "translateX(-400px)"
+                }, 3000);
+            }
+            showToast();
+            // function closeToast(){
+            //     toast.style.transform = "translateX(-400px)";
+            //     console.log('y');
+            // }
+            // let toastElList = [].slice.call(document.querySelectorAll('.toast'))
+            // let toastList = toastElList.map(function (toastEl) {
+            //     return new bootstrap.Toast(toastEl)
+            // })
+            // toastList.forEach(toast => toast.show())
         }
     })
     .catch( (error) => {
