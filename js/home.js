@@ -52,6 +52,9 @@ form.addEventListener("submit", (e) => {
             // })
             // toastList.forEach(toast => toast.show())
         }
+        if (response.status == 404) {
+            window.location.href = 'notFound.html';
+        }
     })
     .catch( (error) => {
         alert('Error: ' + error);
@@ -71,6 +74,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     let todos = await getTodos();
     let queryString = window.location.search;
     let urlParams = new URLSearchParams(queryString);
+    const paramsedit = Object.fromEntries(urlParams.entries());
+    if (!paramsedit) {
+        window.history.replaceState({}, document.title, "/" + "home.html");
+    }   
     let id = +urlParams.get('id');
     let saveTodo;
     
@@ -125,11 +132,16 @@ saveBtn.addEventListener('click', () => {
         if (response.ok) {
             form.reset();
             window.history.replaceState({}, document.title, "/" + "home.html");
-            let toastElList = [].slice.call(document.querySelectorAll('.toast'))
-            let toastList = toastElList.map(function (toastEl) {
-                return new bootstrap.Toast(toastEl)
-            })
-            toastList.forEach(toast => toast.show())
+            let x;
+            let toast = document.getElementById("toast");
+            function showToast(){
+                clearTimeout(x);
+                toast.style.transform = "translateX(0)";
+                x = setTimeout(()=>{
+                    toast.style.transform = "translateX(-400px)"
+                }, 3000);
+            }
+            showToast();
             document.getElementById('addItem').style.display = 'block';
             document.getElementById('saveItem').style.display = 'none';
         }

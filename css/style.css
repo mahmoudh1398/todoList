@@ -2,15 +2,18 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins",sans-serif;
+    font-family: "Poppins", sans-serif;
     border: none;
 }
 
-body{
-    background-color: #FAFAFA;
+body {
+    background-color: #F5F5F5;
 }
 
-.wrapper{
+/* home style */
+
+/* toast message */
+.wrapper {
     width: 420px;
     padding: 30px 20px;
     position: absolute;
@@ -19,13 +22,13 @@ body{
     overflow: hidden;
 }
 
-#toast{
+#toast {
     width: 380px;
     height: 80px;
     padding: 20px;
     background-color: #ffffff;
     box-shadow: 0 10px 20px rgba(75, 50, 50, 0.05);
-    border-right: 8px solid #0D47A1;
+    border-right: 8px solid #2ecc71;
     border-radius: 7px;
     display: grid;
     grid-template-columns: 1.2fr 6fr 0.5fr;
@@ -33,55 +36,46 @@ body{
     transition: 1s;
 }
 
-.container-1,.container-2{
+.container-1,
+.container-2 {
     align-self: center;
 }
 
-.container-1 i{
+.container-1 i {
     font-size: 40px;
-    color: #0D47A1;
+    color: #2ecc71;
 }
 
-.container-2 p:first-child{
+.container-2 p:first-child {
     color: #101020;
     font-weight: 600;
     font-size: 16px;
 }
 
-.container-2 p:last-child{
+.container-2 p:last-child {
     font-size: 12px;
     color: #656565;
     font-weight: 400;
 }
 
-#toast button{
-    align-self: flex-start;
-    background-color: transparent;
-    font-size: 25px;
-    line-height: 0;
-    color: #656565;
-    cursor: pointer;
-}
-
-/* home style */
-/* #toast{
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
+#addItem {
+    background-color: #e55039;
     color: white;
-} */
+}
 
 #saveItem {
     display: none;
+    background-color: #e55039;
+    color: white;
 }
 
 /* todos style */
 main li {
     margin-bottom: 15px;
     padding: 10px;
-    border: 1px solid #03A9F4;
+    border: 1px solid #e55039aa;
     border-radius: 3px;
-    box-shadow: 0 1px 3px #03A9F4;
+    box-shadow: 0 2px 3px #e55039;
 }
 
 .todo_heading {
@@ -101,17 +95,17 @@ main li {
     width: 60%;
     margin-right: 10px;
     font-weight: bold;
-    background-color: #f9f9f9;
+    background-color: #F5F5F5;
 }
 
 .todo_title:focus {
-	outline: none;
+    outline: none;
 }
 
 .todo_dueDate {
     border: none;
     color: gray;
-    background-color: #f9f9f9;
+    background-color: #F5F5F5;
 }
 
 .todo_dueDate:focus {
@@ -120,89 +114,105 @@ main li {
 
 .todo_heading i:nth-child(4) {
     color: #629cff;
-	cursor: pointer;
+    cursor: pointer;
     margin-right: 10px;
 }
 
 .todo_heading i:nth-child(5) {
     color: #F9314E;
-	cursor: pointer;
+    cursor: pointer;
     margin-right: 10px;
 }
 
 .complete {
-	text-decoration: line-through;
+    text-decoration: line-through;
 }
 
 .pagenumbers {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .pagenumbers button {
-	width: 50px;
-	height: 50px;
-
-	appearance: none;
-	border: none;
-	outline: none;
-	cursor: pointer;
-
-	background-color: #44AAEE;
-
-	margin: 5px;
-	transition: 0.4s;
-
-	color: #FFF;
-	font-size: 18px;
-	text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
-	box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+    width: 50px;
+    height: 50px;
+    appearance: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: #e55039aa;
+    margin: 5px;
+    transition: 0.4s;
+    border-radius: 2px;
+    color: #FFF;
+    font-size: 18px;
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
 }
 
 .pagenumbers button:hover {
-	background-color: #44EEAA;
+    background-color: #e55039;
 }
 
 .pagenumbers button.active {
-	background-color: #44EEAA;
-	box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
-}
-
-#prompt-form{
-    display: inline-block;
-    padding: 5px;
-    width: 400px;
-    border: 1px solid black;
-    vertical-align: middle;
+    background-color: #e55039;
+    box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2);
 }
 
 #prompt-form-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 9999;
     display: none;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-}
-
-#prompt-form-container:before {
-    display: inline-block;
-    height: 100%;
-    content: '';
-    vertical-align: middle;
-}
-
-#cover-div {
     position: fixed;
-    top: 0;
+    z-index: 1;
     left: 0;
-    z-index: 9000;
+    top: 0;
     width: 100%;
     height: 100%;
-    background-color: gray;
-    opacity: 0.3;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 50px;
+}
+
+#prompt-form {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    border: 1px solid #888;
+    border-radius: 5px;
+    width: 400px;
+    padding: 16px;
+}
+
+.close {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+    color: #f44336;
+    cursor: pointer;
+}
+
+#title {
+    background-color: #fefefe;
+}
+
+#dueDate {
+    background-color: #fefefe;
+}
+
+#title:focus {
+    outline: none;
+    background-color: #fefefe;
+}
+
+#dueDate:focus {
+    outline: none;
+    background-color: #fefefe;
 }
