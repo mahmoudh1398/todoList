@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     let urlParams = new URLSearchParams(queryString);
     let emptyPage = +urlParams.get('page');
     
-    if (emptyPage > todos.length / 10) {
+    if (emptyPage > (todos.length / 10)) {
         window.location.href = 'notFound.html';
     }
     
